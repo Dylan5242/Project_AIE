@@ -1,11 +1,16 @@
 from __future__ import annotations
 
 from pathlib import Path
+# from turtle import pd
 from typing import Dict, Iterable, List, Union
 
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
+from pathlib import Path
+from typing import Dict, List
+import re
+from os import PathLiked
 
 PathLike = Union[str, Path]
 
@@ -109,17 +114,27 @@ def plot_correlation_heatmap(df: pd.DataFrame, out_path: PathLike) -> Path:
     return out_path
 
 
+def _sanitize_filename(name: str) -> str:
+    # Заменяем всё, что не буквы/цифры/нижнее подчеркивание, на _
+    name = str(name)
+    return re.sub(r'[^0-9a-zA-Z]+', '_', name)
+
 def save_top_categories_tables(
     top_cats: Dict[str, pd.DataFrame],
     out_dir: PathLike,
 ) -> List[Path]:
     """
     Сохраняет top-k категорий по колонкам в отдельные CSV.
+    Все файлы безопасно именуются и сохраняются в один каталог.
     """
-    out_dir = _ensure_dir(out_dir)
+    out_dir = Path(out_dir)
+    out_dir.mkdir(parents=True, exist_ok=True)
+
     paths: List[Path] = []
     for name, table in top_cats.items():
-        out_path = out_dir / f"top_values_{name}.csv"
+        safe_name = _sanitize_filename(name)
+        out_path = out_dir / f"top_values_{safe_name}.csv"
         table.to_csv(out_path, index=False)
         paths.append(out_path)
     return paths
+
