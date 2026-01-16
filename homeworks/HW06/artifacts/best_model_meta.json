@@ -1,0 +1,67 @@
+{
+  "model_info": {
+    "model_name": "AdaBoostClassifier",
+    "library": "scikit-learn",
+    "version": "1.3.0"
+  },
+  "training_info": {
+    "dataset": "S06-hw-dataset-01.csv",
+    "train_samples": 9600,
+    "test_samples": 2400,
+    "features_count": 28,
+    "random_state": 42,
+    "training_date": "2026-01-16 13:58:06"
+  },
+  "hyperparameters": {
+    "best_params": {
+      "learning_rate": 1.0,
+      "n_estimators": 200
+    },
+    "cv_score": 0.9101293079403332,
+    "cv_scoring": "roc_auc",
+    "cv_folds": 5
+  },
+  "test_metrics": {
+    "accuracy": 0.84625,
+    "f1_score": 0.7432150313152401,
+    "roc_auc": 0.9069911380833883,
+    "confusion_matrix": {
+      "tn": 1497,
+      "fp": 127,
+      "fn": 242,
+      "tp": 534
+    }
+  },
+  "feature_importance": {
+    "top_features": {
+      "num19": 0.10867607663399517,
+      "num06": 0.05603130871971958,
+      "num18": 0.05003253389873537,
+      "num07": 0.03678433357879225,
+      "num20": 0.021127751891727175,
+      "num21": 0.015048832588492145,
+      "num16": 0.014689293331979037,
+      "num04": 0.012616011121832194,
+      "num01": 0.01051987583159808,
+      "num14": 0.010180491722106421
+    }
+  },
+  "model_comparison": {
+    "best_model": "AdaBoost",
+    "comparison_metric": "roc_auc",
+    "ranking": [
+      {
+        "model": "AdaBoost",
+        "roc_auc": 0.9069911380833883
+      },
+      {
+        "model": "DecisionTree",
+        "roc_auc": 0.903028350515464
+      },
+      {
+        "model": "RandomForest",
+        "roc_auc": 0.9007113021177189
+      }
+    ]
+  }
+}

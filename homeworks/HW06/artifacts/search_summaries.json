@@ -1,0 +1,53 @@
+{
+  "DecisionTree": {
+    "best_params": {
+      "ccp_alpha": 0.0007909140667761359
+    },
+    "best_cv_score": 0.9071165854075783,
+    "cv_scoring": "f1",
+    "param_grid": {
+      "n_estimators": [
+        50,
+        100,
+        200
+      ],
+      "learning_rate": [
+        0.05,
+        0.1,
+        0.5,
+        1.0
+      ]
+    },
+    "cv_folds": 5
+  },
+  "RandomForest": {
+    "best_params": {
+      "ccp_alpha": 0.0007909140667761359
+    },
+    "best_cv_score": 0.9071165854075783,
+    "cv_scoring": "roc_auc",
+    "cv_folds": 5
+  },
+  "AdaBoost": {
+    "best_params": {
+      "learning_rate": 1.0,
+      "n_estimators": 200
+    },
+    "best_cv_score": 0.9101293079403332,
+    "cv_scoring": "roc_auc",
+    "param_grid": {
+      "n_estimators": [
+        50,
+        100,
+        200
+      ],
+      "learning_rate": [
+        0.05,
+        0.1,
+        0.5,
+        1.0
+      ]
+    },
+    "cv_folds": 5
+  }
+}

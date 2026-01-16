@@ -1,0 +1,30 @@
+[
+  {
+    "model": "AdaBoost",
+    "accuracy": 0.84625,
+    "f1": 0.7432150313152401,
+    "roc_auc": 0.9069911380833883,
+    "params": {
+      "learning_rate": 1.0,
+      "n_estimators": 200
+    }
+  },
+  {
+    "model": "DecisionTree",
+    "accuracy": 0.86625,
+    "f1": 0.7869940278699403,
+    "roc_auc": 0.903028350515464,
+    "params": {
+      "ccp_alpha": 0.0007909140667761359
+    }
+  },
+  {
+    "model": "RandomForest",
+    "accuracy": 0.86625,
+    "f1": 0.7869940278699403,
+    "roc_auc": 0.9007113021177189,
+    "params": {
+      "ccp_alpha": 0.0007909140667761359
+    }
+  }
+]
