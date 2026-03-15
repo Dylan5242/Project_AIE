@@ -1,8 +1,8 @@
 experiment_id,dataset,seed,model_summary,optimizer,lr,momentum,weight_decay,epochs_trained,best_val_accuracy,best_val_loss
-E1_baseline,EMNIST_BALANCED (torchvision),42,"Hidden: [256, 128], Activation: ReLU, Dropout: 0.0, BatchNorm: False",Adam,0.001,0.0,0.0,20,0.7508223652839661,0.8667246291511937
-E2_dropout,EMNIST_BALANCED (torchvision),42,"Hidden: [256, 128], Activation: ReLU, Dropout: 0.25, BatchNorm: False",Adam,0.001,0.0,0.0,20,0.7471216917037964,0.820621813598432
-E3_batchnorm,EMNIST_BALANCED (torchvision),42,"Hidden: [256, 128], Activation: ReLU, Dropout: 0.0, BatchNorm: True",Adam,0.001,0.0,0.0,20,0.7530153393745422,0.8818140374986749
-E4_early_stopping,EMNIST_BALANCED (torchvision),42,"Hidden: [256, 128], Reg: BatchNorm",Adam,0.001,0.0,0.0,12,0.7563048601150513,0.771587145955939
-O1_high_lr,EMNIST_BALANCED (torchvision),42,"Hidden: [128], Activation: ReLU, Dropout: 0.0, BatchNorm: False",Adam,0.1,0.0,0.0,20,0.024396929889917374,3.863630959862157
-O2_low_lr,EMNIST_BALANCED (torchvision),42,"Hidden: [128], Activation: ReLU, Dropout: 0.0, BatchNorm: False",Adam,1e-05,0.0,0.0,20,0.39610743522644043,2.9484217166900635
-O3_sgd_momentum,EMNIST_BALANCED (torchvision),42,"Hidden: [128], Activation: ReLU, Dropout: 0.0, BatchNorm: False",SGD,0.01,0.9,0.0001,20,0.7072368264198303,0.9730803025396246
+E1,EMNIST_BALANCED (torchvision),42,"Hidden: [256, 128], Activation: ReLU, Dropout: 0.0, BatchNorm: False",Adam,0.001,0.0,0.0,20,0.7508223652839661,0.8667246291511937
+E2,EMNIST_BALANCED (torchvision),42,"Hidden: [256, 128], Activation: ReLU, Dropout: 0.25, BatchNorm: False",Adam,0.001,0.0,0.0,20,0.7471216917037964,0.820621813598432
+E3,EMNIST_BALANCED (torchvision),42,"Hidden: [256, 128], Activation: ReLU, Dropout: 0.0, BatchNorm: True",Adam,0.001,0.0,0.0,20,0.7530153393745422,0.8818140374986749
+E4,EMNIST_BALANCED (torchvision),42,"Hidden: [256, 128], Reg: BatchNorm",Adam,0.001,0.0,0.0,12,0.7563048601150513,0.771587145955939
+O1,EMNIST_BALANCED (torchvision),42,"Hidden: [128], Activation: ReLU, Dropout: 0.0, BatchNorm: False",Adam,0.1,0.0,0.0,20,0.024396929889917374,3.863630959862157
+O2,EMNIST_BALANCED (torchvision),42,"Hidden: [128], Activation: ReLU, Dropout: 0.0, BatchNorm: False",Adam,1e-05,0.0,0.0,20,0.39610743522644043,2.9484217166900635
+O3,EMNIST_BALANCED (torchvision),42,"Hidden: [128], Activation: ReLU, Dropout: 0.0, BatchNorm: False",SGD,0.01,0.9,0.0001,20,0.7072368264198303,0.9730803025396246
