@@ -39,7 +39,7 @@
 ## 7. Результаты
 **Ссылки на файлы:**
 *   Таблица результатов: [`runs.csv`](./artifacts/runs.csv)
-*   Лучшая модель: [`best_model.pt`]()
+*   Лучшая модель: [`best_model.pt`](./artifacts/best_model.pt)
 *   Конфиг лучшей модели: [`best_config.json`](./artifacts/best_config.json)
 *   Кривые лучшего прогона: [`curves_best.png`](./artifacts/figures/curves_best.png)
 *   Кривые “плохих LR”: [`curves_lr_extremes.png`](./artifacts/figures/curves_lr_extremes.png)
