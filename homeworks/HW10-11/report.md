@@ -66,13 +66,13 @@
 
 Ссылки на файлы в репозитории:
 
-* Таблица результатов: ./artifacts/runs.csv
-* Лучшая модель части A: ./artifacts/best_classifier.pt
-* Конфиг лучшей модели части A: ./artifacts/best_classifier_config.json
-* Кривые лучшего прогона классификации: ./artifacts/figures/classification_curves_best.png
-* Сравнение C1-C4: ./artifacts/figures/classification_compare.png
-* Визуализация аугментаций: ./artifacts/figures/augmentations_preview.png
-* Визуализации второй части: ./artifacts/figures/...
+* Таблица результатов: [`runs`](./artifacts/runs.csv)
+* Лучшая модель части A: [`best_classifer.pt`](./artifacts/best_classifier.pt)
+* Конфиг лучшей модели части A: [``][./artifacts/best_classifier_config.json]
+* Кривые лучшего прогона классификации: [``](./artifacts/figures/classification_curves_best.png)
+* Сравнение C1-C4: [``](./artifacts/figures/classification_compare.png)
+* Визуализация аугментаций: [``](./artifacts/figures/augmentations_preview.png)
+* Визуализации второй части: [`detection_metrics`](./artifacts/figures/detection_metrics) [`detection_examples`](./artifacts/figures/detection_examples)
 
 Короткая сводка (6-10 строк):
 
