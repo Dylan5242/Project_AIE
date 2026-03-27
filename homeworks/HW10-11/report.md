@@ -11,7 +11,7 @@
 * Python: 3.14.3
 * torch / torchvision: PyTorch + torchvision (с поддержкой pretrained моделей)
 * Устройство (CPU/GPU): GPU (CUDA)
-* Seed: фиксированный (для воспроизводимости экспериментов)
+* Seed: 42
 * Как запустить: открыть HW10-11.ipynb и выполнить Run All.
 
 ## 3. Данные
