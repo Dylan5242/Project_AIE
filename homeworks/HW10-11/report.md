@@ -68,10 +68,10 @@
 
 * Таблица результатов: [`runs`](./artifacts/runs.csv)
 * Лучшая модель части A: [`best_classifer.pt`](./artifacts/best_classifier.pt)
-* Конфиг лучшей модели части A: [``][./artifacts/best_classifier_config.json]
-* Кривые лучшего прогона классификации: [``](./artifacts/figures/classification_curves_best.png)
-* Сравнение C1-C4: [``](./artifacts/figures/classification_compare.png)
-* Визуализация аугментаций: [``](./artifacts/figures/augmentations_preview.png)
+* Конфиг лучшей модели части A: [`best_classifier_config`](./artifacts/best_classifier_config.json)
+* Кривые лучшего прогона классификации: [`classification_curves_best`](./artifacts/figures/classification_curves_best.png)
+* Сравнение C1-C4: [`classification_compare`](./artifacts/figures/classification_compare.png)
+* Визуализация аугментаций: [`augmentations_preview`](./artifacts/figures/augmentations_preview.png)
 * Визуализации второй части: [`detection_metrics`](./artifacts/figures/detection_metrics) [`detection_examples`](./artifacts/figures/detection_examples)
 
 Короткая сводка (6-10 строк):
@@ -112,10 +112,4 @@ Transfer learning существенно улучшает результаты �
 * confusion matrix для классификации
 * дополнительная постобработка для второй части
 * дополнительные графики: ./artifacts/figures/...
-
----
-
-Если хочешь, могу ещё:
-
-* упростить под «на 1 страницу»
 * или наоборот сделать более «научную» версию (как для отчёта в вузе)
