@@ -18,7 +18,7 @@
 
 ### 3.1. Часть A: классификация
 
-* Датасет: CIFAR-10
+* Датасет: CIFAR-100
 * Разделение: стандартное train / test (с выделением val из train)
 * Базовые transforms: normalization с mean (0.4914, 0.4822, 0.4465) и std (0.2023, 0.1994, 0.2010)
 * Augmentation transforms: RandomHorizontalFlip, RandomRotation(15), ColorJitter (brightness, contrast, saturation)
@@ -72,7 +72,7 @@
 * Кривые лучшего прогона классификации: [`classification_curves_best`](./artifacts/figures/classification_curves_best.png)
 * Сравнение C1-C4: [`classification_compare`](./artifacts/figures/classification_compare.png)
 * Визуализация аугментаций: [`augmentations_preview`](./artifacts/figures/augmentations_preview.png)
-* Визуализации второй части: [`detection_metrics`](./artifacts/figures/detection_metrics) [`detection_examples`](./artifacts/figures/detection_examples)
+* Визуализации второй части: [`detection_metrics`](./artifacts/figures/detection_metrics.png) [`detection_examples`](./artifacts/figures/detection_examples.png)
 
 Короткая сводка (6-10 строк):
 
