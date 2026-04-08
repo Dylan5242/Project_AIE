@@ -1,5 +1,5 @@
 {
-    "dataset": "CIFAR-10",
+    "dataset": "CIFAR-100",
     "architecture": "ResNet18",
     "transforms": "Resize 224, ToTensor, ImageNet Normalize",
     "learning_rate": 0.0001,
