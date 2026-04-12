@@ -1,13 +1,8 @@
-experiment_id,task,dataset,seed,model_summary,optimizer,lr,epochs_trained,best_val_accuracy,test_accuracy,mean_iou,notes
-C1,Classification,CIFAR100,42,SimpleCNN,Adam,0.001,4.0,0.478,,,Baseline
-C2,Classification,CIFAR100,42,SimpleCNN,Adam,0.001,4.0,0.441,,,Augmentation used
-C3,Classification,CIFAR100,42,ResNet18,Adam,0.001,4.0,0.73,,,Baseline
-C4,Classification,CIFAR100,42,ResNet18,Adam,0.0001,4.0,0.868,0.52,,Fine-tuned
-C1,Classification,CIFAR100,42,SimpleCNN,Adam,0.001,4.0,0.137,,,Baseline
-C2,Classification,CIFAR100,42,SimpleCNN,Adam,0.001,4.0,0.13,,,Augmentation used
-C1,Classification,CIFAR100,42,SimpleCNN,Adam,0.001,4.0,0.145,,,Baseline
-C2,Classification,CIFAR100,42,SimpleCNN,Adam,0.001,4.0,0.135,,,Augmentation used
-C3,Classification,CIFAR100,42,ResNet18,Adam,0.001,4.0,0.387,,,Baseline
-C4,Classification,CIFAR100,42,ResNet18,Adam,0.0001,4.0,0.493,0.52,,Fine-tuned
-V1,Detection,VOC,42,Faster R-CNN (0.3),N/A,,,,,0.45,Threshold 0.3
-V2,Detection,VOC,42,Faster R-CNN (0.7),N/A,,,,,0.5,Threshold 0.7
+experiment_id,task,dataset,model_summary,optimizer,lr,epochs,precision,recall,mean_iou
+C4,Classification,CIFAR100,ResNet18,Adam,0.0001,4.0,0.0,0.0,
+C1,Classification,CIFAR100,SimpleCNN,Adam,0.001,4.0,0.0,0.0,
+C2,Classification,CIFAR100,SimpleCNN,Adam,0.001,4.0,0.0,0.0,
+C3,Classification,CIFAR100,ResNet18,Adam,0.001,4.0,0.0,0.0,
+C4,Classification,CIFAR100,ResNet18,Adam,0.0001,4.0,0.0,0.0,
+V1,Detection,VOC,Faster R-CNN (0.3),N/A,,,0.31645569620253167,0.9615384615384616,0.45
+V2,Detection,VOC,Faster R-CNN (0.7),N/A,,,0.48,0.9230769230769231,0.5
