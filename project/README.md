@@ -38,7 +38,7 @@ timestamp,requests
 Финальная модель для API:
 
 ```text
-models/random_forest_tuned.joblib
+artifacts/models/random_forest_tuned.joblib
 ```
 
 Она выбрана по лучшим метрикам на validation и test.
@@ -55,6 +55,20 @@ models/random_forest_tuned.joblib
 | linear_regression | 58.19 | 82.67 | 58.27 |
 | seasonal_naive_lag_24 | 60.75 | 89.52 | 61.95 |
 | seasonal_naive_lag_168 | 61.30 | 91.77 | 63.22 |
+
+## Структура проекта
+
+Проект сохранён в структуре шаблона репозитория:
+
+- `notebooks/` — EDA и эксперименты;
+- `src/` — загрузка данных, признаки, обучение и inference;
+- `app/` — FastAPI-приложение;
+- `data/` — raw и processed данные;
+- `configs/` — шаблон переменных окружения;
+- `tests/` — тестовые/демо-скрипты;
+- `artifacts/` — сохранённые модели и таблицы результатов;
+- `report.md` — отчёт;
+- `self-checklist.md` — самооценка.
 
 ## Локальный запуск
 

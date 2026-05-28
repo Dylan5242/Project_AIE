@@ -19,7 +19,7 @@ Status: done
 Endpoint `/predict` загружает сохранённую модель:
 
 ```text
-models/random_forest_tuned.joblib
+artifacts/models/random_forest_tuned.joblib
 ```
 
 Код: `app/main.py`, `src/predict.py`.
@@ -77,7 +77,7 @@ Status: done
 
 Status: done
 
-Есть `.env.example`. Реальных секретов в проекте нет.
+Есть `configs/.env.example`. Реальных секретов в проекте нет.
 
 ## 8. Наблюдаемость
 

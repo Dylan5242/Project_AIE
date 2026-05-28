@@ -134,7 +134,7 @@ random_state=42
 В `/predict` используется реальная сохранённая модель:
 
 ```text
-models/random_forest_tuned.joblib
+artifacts/models/random_forest_tuned.joblib
 ```
 
 ## Ограничения

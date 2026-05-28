@@ -9,7 +9,7 @@ COPY . .
 
 ENV APP_HOST=0.0.0.0
 ENV APP_PORT=8000
-ENV MODEL_PATH=models/random_forest_tuned.joblib
+ENV MODEL_PATH=artifacts/models/random_forest_tuned.joblib
 ENV DATA_PATH=data/processed/calgary_http_hourly.csv
 
 EXPOSE 8000
