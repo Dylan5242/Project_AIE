@@ -1,0 +1,13 @@
+model,MAE,RMSE,sMAPE,params
+random_forest_tuned,35.65671237550406,48.58124667248034,49.44905707779017,"{""n_estimators"": 300, ""max_depth"": 16, ""min_samples_leaf"": 5, ""max_features"": 0.8}"
+hist_gradient_boosting_tuned,35.9478851029472,48.87855619157196,49.91035593096505,"{""max_iter"": 300, ""learning_rate"": 0.03, ""max_leaf_nodes"": 15, ""l2_regularization"": 0.1}"
+hist_gradient_boosting_tuned,36.05532386902676,49.052860299740665,50.004474469438165,"{""max_iter"": 200, ""learning_rate"": 0.05, ""max_leaf_nodes"": 15, ""l2_regularization"": 0.05}"
+random_forest_tuned,36.077616267312,49.23884104705916,49.84657044459197,"{""n_estimators"": 300, ""max_depth"": 18, ""min_samples_leaf"": 5, ""max_features"": 1.0}"
+random_forest_tuned,36.07778383672676,49.2389380623343,49.84684549704354,"{""n_estimators"": 300, ""max_depth"": null, ""min_samples_leaf"": 5, ""max_features"": 1.0}"
+random_forest_tuned,36.18006216388617,49.57629328604121,50.0353738970328,"{""n_estimators"": 400, ""max_depth"": 12, ""min_samples_leaf"": 2, ""max_features"": 1.0}"
+random_forest_tuned,36.30354897210745,49.61536134492658,50.143910876799566,"{""n_estimators"": 200, ""max_depth"": 14, ""min_samples_leaf"": 3, ""max_features"": 1.0}"
+random_forest_tuned,36.40098967171082,49.7102992512842,50.24344284408432,"{""n_estimators"": 300, ""max_depth"": 16, ""min_samples_leaf"": 3, ""max_features"": 1.0}"
+hist_gradient_boosting_tuned,36.40709431405199,49.80843706266059,50.31567937369527,"{""max_iter"": 200, ""learning_rate"": 0.04, ""max_leaf_nodes"": 31, ""l2_regularization"": 0.05}"
+hist_gradient_boosting_tuned,36.41715784020371,49.5310756242895,50.460712461744976,"{""max_iter"": 200, ""learning_rate"": 0.08, ""max_leaf_nodes"": 15, ""l2_regularization"": 0.1}"
+hist_gradient_boosting_tuned,36.49253348840076,49.89790713293695,50.430169533662905,"{""max_iter"": 300, ""learning_rate"": 0.03, ""max_leaf_nodes"": 31, ""l2_regularization"": 0.05}"
+hist_gradient_boosting_tuned,36.87829828869908,50.40334699079454,50.91284758213944,"{""max_iter"": 250, ""learning_rate"": 0.05, ""max_leaf_nodes"": 31, ""l2_regularization"": 0.01}"
