@@ -4,7 +4,7 @@ ML-проект для прогноза количества HTTP-запросо
 
 ## Данные
 
-ЛДля обучения использовался Calgary-HTTP:
+Для обучения использовался Calgary-HTTP:
 
 https://ita.ee.lbl.gov/html/contrib/Calgary-HTTP.html
 
@@ -101,15 +101,18 @@ curl http://127.0.0.1:8000/demo-request
 curl "http://127.0.0.1:8000/demo-request?hour=13"
 ```
 
-Отправить прогноз:
+Отправить прогноз можно с телом, полученным из `GET /demo-request`:
 
-```bash
-curl -X POST http://127.0.0.1:8000/predict ^
-  -H "Content-Type: application/json" ^
-  -d "{\"last_timestamp\":\"1995-10-11T14:00:00\",\"requests\":[168 hourly values]}"
+```powershell
+$body = Invoke-RestMethod "http://127.0.0.1:8000/demo-request?hour=13"
+Invoke-RestMethod `
+  -Uri "http://127.0.0.1:8000/predict" `
+  -Method Post `
+  -ContentType "application/json" `
+  -Body ($body | ConvertTo-Json -Depth 5)
 ```
 
-Тело запроса для интеграции:
+Тело запроса для интеграции выглядит так. Массив `requests` ниже сокращён для читаемости; в реальном запросе нужно передать 168 чисел.
 
 ```json
 {
@@ -128,10 +131,13 @@ curl -X POST http://127.0.0.1:8000/predict ^
 
 Можно запросить компактный прогноз только по выбранным часам:
 
-```bash
-curl -X POST "http://127.0.0.1:8000/predict?time_range=13:00-14:00" ^
-  -H "Content-Type: application/json" ^
-  -d "{\"last_timestamp\":\"2026-05-29T13:00:00\",\"requests\":[168 hourly values]}"
+```powershell
+$body = Invoke-RestMethod "http://127.0.0.1:8000/demo-request?hour=13"
+Invoke-RestMethod `
+  -Uri "http://127.0.0.1:8000/predict?time_range=13:00-14:00" `
+  -Method Post `
+  -ContentType "application/json" `
+  -Body ($body | ConvertTo-Json -Depth 5)
 ```
 
 Типичный ответ:
