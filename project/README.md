@@ -4,7 +4,7 @@ ML-проект для прогноза количества HTTP-запросо
 
 ## Данные
 
-ИДля обучения использовался Calgary-HTTP:
+ЛДля обучения использовался Calgary-HTTP:
 
 https://ita.ee.lbl.gov/html/contrib/Calgary-HTTP.html
 
