@@ -2,13 +2,14 @@ from __future__ import annotations
 
 import logging
 import os
+from datetime import datetime, timedelta
 from functools import lru_cache
 
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI, HTTPException, Query
 from pydantic import BaseModel, Field
 
 from src.config import DATA_PATH, HORIZON, LOG_LEVEL, MODEL_PATH
-from src.data import latest_history
+from src.data import history_ending_at_hour
 from src.predict import LoadForecaster
 
 
@@ -51,6 +52,18 @@ def get_forecaster() -> LoadForecaster:
     return LoadForecaster(MODEL_PATH)
 
 
+def selected_demo_hour(hour: int | None) -> int:
+    """Return the requested last-observation hour or the current system hour."""
+    if hour is None:
+        return datetime.now().hour
+    return hour
+
+
+def yesterday_at_hour(hour: int) -> datetime:
+    yesterday = datetime.now().date() - timedelta(days=1)
+    return datetime.combine(yesterday, datetime.min.time()).replace(hour=hour)
+
+
 @app.get("/health")
 def health() -> dict[str, object]:
     model_exists = MODEL_PATH.exists()
@@ -87,11 +100,23 @@ def predict(payload: PredictRequest) -> PredictResponse:
 
 
 @app.get("/demo-request")
-def demo_request() -> dict[str, object]:
-    """Return a ready-to-use request body built from the latest dataset window."""
-    history = latest_history()
+def demo_request(
+    hour: int | None = Query(
+        default=None,
+        ge=0,
+        le=23,
+        description=(
+            "Hour of the last observation in 24-hour format. "
+            "Defaults to the current system hour."
+        ),
+        examples=[13],
+    ),
+) -> dict[str, object]:
+    """Return a ready-to-use request body with yesterday's date."""
+    last_observation_hour = selected_demo_hour(hour)
+    history = history_ending_at_hour(last_observation_hour)
     return {
-        "last_timestamp": history["timestamp"].iloc[-1].isoformat(),
+        "last_timestamp": yesterday_at_hour(last_observation_hour).isoformat(),
         "requests": history["requests"].astype(float).tolist(),
     }
 
