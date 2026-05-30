@@ -6,11 +6,12 @@ from datetime import datetime, timedelta
 from functools import lru_cache
 
 from fastapi import FastAPI, HTTPException, Query
+import pandas as pd
 from pydantic import BaseModel, Field
 
-from src.config import DATA_PATH, HORIZON, LOG_LEVEL, MODEL_PATH
-from src.data import history_ending_at_hour
-from src.predict import LoadForecaster
+from src.models.config import DATA_PATH, HORIZON, LOG_LEVEL, MODEL_PATH
+from src.models.data import history_ending_at_hour
+from src.models.predict import LoadForecaster
 
 
 logging.basicConfig(
@@ -44,6 +45,7 @@ class PredictResponse(BaseModel):
     last_timestamp: str
     horizon: int
     forecast: list[dict[str, float | str]]
+    forecast_by_hour: dict[str, float] | None = None
 
 
 @lru_cache(maxsize=1)
@@ -64,6 +66,41 @@ def yesterday_at_hour(hour: int) -> datetime:
     return datetime.combine(yesterday, datetime.min.time()).replace(hour=hour)
 
 
+def parse_time_range(time_range: str) -> list[str]:
+    """Parse an inclusive full-hour range like 13:00-14:00."""
+    try:
+        raw_start, raw_end = time_range.split("-", maxsplit=1)
+        start = datetime.strptime(raw_start.strip(), "%H:%M").time()
+        end = datetime.strptime(raw_end.strip(), "%H:%M").time()
+    except ValueError as exc:
+        raise HTTPException(
+            status_code=400,
+            detail="time_range must use HH:MM-HH:MM format, for example 13:00-14:00.",
+        ) from exc
+
+    if start.minute != 0 or end.minute != 0:
+        raise HTTPException(
+            status_code=400,
+            detail="Only full-hour ranges are supported, for example 13:00-14:00.",
+        )
+
+    hours: list[str] = []
+    current_hour = start.hour
+    while True:
+        hours.append(f"{current_hour:02d}:00")
+        if current_hour == end.hour:
+            return hours
+        current_hour = (current_hour + 1) % 24
+
+
+def forecast_by_hour(forecast: list[dict[str, float | str]], hours: list[str]) -> dict[str, float]:
+    values_by_hour = {
+        pd.Timestamp(item["timestamp"]).strftime("%H:%M"): float(item["requests"])
+        for item in forecast
+    }
+    return {hour: values_by_hour[hour] for hour in hours if hour in values_by_hour}
+
+
 @app.get("/health")
 def health() -> dict[str, object]:
     model_exists = MODEL_PATH.exists()
@@ -79,8 +116,19 @@ def health() -> dict[str, object]:
     }
 
 
-@app.post("/predict", response_model=PredictResponse)
-def predict(payload: PredictRequest) -> PredictResponse:
+@app.post("/predict", response_model=PredictResponse, response_model_exclude_none=True)
+def predict(
+    payload: PredictRequest,
+    time_range: str | None = Query(
+        default=None,
+        description=(
+            "Optional inclusive full-hour range for a compact forecast view, "
+            "for example 13:00-14:00."
+        ),
+        examples=["13:00-14:00"],
+    ),
+) -> PredictResponse:
+    selected_hours = parse_time_range(time_range) if time_range is not None else None
     logger.info(
         "Received prediction request: last_timestamp=%s, history_len=%d",
         payload.last_timestamp,
@@ -96,7 +144,10 @@ def predict(payload: PredictRequest) -> PredictResponse:
         raise HTTPException(status_code=400, detail=str(exc)) from exc
 
     logger.info("Prediction completed: horizon=%d", result.horizon)
-    return PredictResponse(**result.__dict__)
+    response = PredictResponse(**result.__dict__)
+    if selected_hours is not None:
+        response.forecast_by_hour = forecast_by_hour(response.forecast, selected_hours)
+    return response
 
 
 @app.get("/demo-request")
@@ -126,4 +177,4 @@ if __name__ == "__main__":
 
     host = os.getenv("APP_HOST", "0.0.0.0")
     port = int(os.getenv("APP_PORT", "8000"))
-    uvicorn.run("app.main:app", host=host, port=port, reload=False)
+    uvicorn.run("src.service.main:app", host=host, port=port, reload=False)

@@ -7,7 +7,7 @@ Status: done
 Сервис запускается по инструкции из `README.md`:
 
 ```bash
-uvicorn app.main:app --reload
+uvicorn src.service.main:app --reload
 ```
 
 Также есть Dockerfile.
@@ -22,7 +22,7 @@ Endpoint `/predict` загружает сохранённую модель:
 artifacts/models/random_forest_tuned.joblib
 ```
 
-Код: `app/main.py`, `src/predict.py`.
+Код: `src/service/main.py`, `src/models/predict.py`.
 
 ## 3. EDA + эксперимент
 
@@ -59,12 +59,12 @@ Status: done
 Код вынесен из notebook:
 
 ```text
-src/data.py
-src/features.py
-src/predict.py
-src/train.py
-src/metrics.py
-app/main.py
+src/models/data.py
+src/models/features.py
+src/models/predict.py
+src/models/train.py
+src/models/metrics.py
+src/service/main.py
 ```
 
 ## 6. Развёртывание
@@ -86,7 +86,7 @@ Status: done
 Есть:
 
 - `GET /health`;
-- базовое логирование запросов и ошибок в `app/main.py`.
+- базовое логирование запросов и ошибок в `src/service/main.py`.
 
 ## 9. Обоснование модели
 

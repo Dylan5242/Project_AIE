@@ -61,8 +61,8 @@ artifacts/models/random_forest_tuned.joblib
 Проект сохранён в структуре шаблона репозитория:
 
 - `notebooks/` — EDA и эксперименты;
-- `src/` — загрузка данных, признаки, обучение и inference;
-- `app/` — FastAPI-приложение;
+- `src/models/` — загрузка данных, признаки, обучение и inference;
+- `src/service/` — FastAPI-приложение;
 - `data/` — raw и processed данные;
 - `configs/` — шаблон переменных окружения;
 - `tests/` — тестовые/демо-скрипты;
@@ -78,7 +78,7 @@ artifacts/models/random_forest_tuned.joblib
 python -m venv .venv
 .venv\Scripts\activate
 pip install -r requirements.txt
-uvicorn app.main:app --reload
+uvicorn src.service.main:app --reload
 ```
 
 Проверка сервиса:
@@ -109,6 +109,74 @@ curl -X POST http://127.0.0.1:8000/predict ^
   -d "{\"last_timestamp\":\"1995-10-11T14:00:00\",\"requests\":[168 hourly values]}"
 ```
 
+Тело запроса для интеграции:
+
+```json
+{
+  "last_timestamp": "2026-05-29T13:00:00",
+  "requests": [
+    349,
+    389,
+    172
+  ]
+}
+```
+
+Поле `requests` должно содержать 168 чисел: почасовую историю за последние 7 дней.
+Последний элемент массива соответствует времени `last_timestamp`.
+Полный пример тела можно получить через `GET /demo-request`.
+
+Можно запросить компактный прогноз только по выбранным часам:
+
+```bash
+curl -X POST "http://127.0.0.1:8000/predict?time_range=13:00-14:00" ^
+  -H "Content-Type: application/json" ^
+  -d "{\"last_timestamp\":\"2026-05-29T13:00:00\",\"requests\":[168 hourly values]}"
+```
+
+Типичный ответ:
+
+```json
+{
+  "model_path": "artifacts/models/random_forest_tuned.joblib",
+  "last_timestamp": "2026-05-29T13:00:00",
+  "horizon": 24,
+  "forecast": [
+    {
+      "timestamp": "2026-05-29T14:00:00",
+      "requests": 299.08
+    },
+    {
+      "timestamp": "2026-05-29T15:00:00",
+      "requests": 216.53
+    }
+  ],
+  "forecast_by_hour": {
+    "13:00": 138.11,
+    "14:00": 299.08
+  }
+}
+```
+
+Если параметр `time_range` не передан, поле `forecast_by_hour` не возвращается.
+Поле `forecast` всегда содержит прогноз на 24 часа.
+
+Краткий пример интеграции на Python:
+
+```python
+import requests
+
+payload = requests.get("http://127.0.0.1:8000/demo-request?hour=13").json()
+response = requests.post(
+    "http://127.0.0.1:8000/predict?time_range=13:00-14:00",
+    json=payload,
+    timeout=30,
+)
+response.raise_for_status()
+forecast = response.json()
+print(forecast["forecast_by_hour"])
+```
+
 Для простоты ручной демонстрации лучше открыть `http://127.0.0.1:8000/docs`, выполнить `GET /demo-request`, затем скопировать JSON в `POST /predict`.
 
 ## Docker
@@ -135,7 +203,7 @@ python scripts/prepare_calgary_http.py --download
 ## Повторное обучение финальной модели
 
 ```bash
-python -m src.train
+python -m src.models.train
 ```
 
 Эксперименты и подбор гиперпараметров находятся в:
